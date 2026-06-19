@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Pedido.h"
-
+#include <iostream>
 
 class NodoHistorial {
 public:
