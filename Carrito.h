@@ -1,11 +1,11 @@
 #pragma once
 
-#include "ItemCarrito.h"
+#include "ItemPedido.h"
 
 class Carrito {
 private:
     string nombreCliente;
-    vector<ItemCarrito> items;
+    vector<ItemPedido> items;
     double total;
 
 public:
@@ -37,7 +37,7 @@ public:
                 return;
             }
         }
-        ItemCarrito item(prod, cantidad);
+        ItemPedido item(prod, cantidad);
         items.push_back(item);
         calcularTotal();
         cout << "  [OK] '" << prod->nombre << "' agregado al carrito." << endl;

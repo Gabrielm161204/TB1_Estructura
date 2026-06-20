@@ -9,7 +9,7 @@ public:
     double precio;
     bool estado;   // true = disponible, false = no disponible
 
-    // Constructor por defecto
+	// Constructor por defecto en caso no se proporcionen parametros
     Producto() : nombre(""), stock(0), categoria(""), precio(0.0), estado(true) {}
 
     // Constructor con parametros
