@@ -7,8 +7,8 @@ class NodoHistorial {
 public:
     Pedido pedido;
     NodoHistorial* siguiente;
-    NodoHistorial* anterior;   // <-- puntero al nodo anterior (lista doble)
-};
+    NodoHistorial* anterior;
+}; 
 
 // ============================================================
 // Clase Historial: usa LISTA ENLAZADA DOBLE de Pedidos
@@ -79,7 +79,7 @@ public:
         cout << "  Total de pedidos: " << cantidadCompras << endl;
     }
 
-    // RECURSIVIDAD: Calcula el total gastado de forma recursiva
+	// RECURSIVIDAD: Calcula el total gastado de forma recursiva 
     double calcularTotalRecursivo(NodoHistorial* nodo) {
         if (nodo == nullptr) return 0.0;   // Caso base
         return nodo->pedido.total + calcularTotalRecursivo(nodo->siguiente);  // Recursion

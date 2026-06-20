@@ -74,7 +74,7 @@ public:
     // Valida que todos los items tengan stock suficiente
     bool validarStock() {
         // LAMBDA: verifica si algun item supera el stock disponible
-        auto tieneStockSuficiente = []( ItemCarrito& item) {
+        auto tieneStockSuficiente = []( ItemPedido& item) {
             return item.cantidad <= item.producto->stock;
             };
 
@@ -100,7 +100,7 @@ public:
 
     bool estaVacio() { return items.empty(); }
     double getTotal() { return total; }
-    vector<ItemCarrito>& getItems() { return items; }
+    vector<ItemPedido>& getItems() { return items; }
     string getNombreCliente() { return nombreCliente; }
 };
 

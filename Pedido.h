@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DetallePedido.h"
+#include "ItemPedido.h"
 
 // Forward declaration para evitar inclusion circular
 //class Cliente;
@@ -10,7 +10,7 @@ class Pedido {
 public:
     int id;
     string nombreCliente;       // Guardamos nombre en lugar de puntero para simplificar
-    vector<DetallePedido> detalles;
+    vector<ItemPedido> detalles;
     double total;
     string estado;              // "Pendiente", "En proceso", "Entregado", "Cancelado"
     string fechaHora;
@@ -23,7 +23,7 @@ public:
 
     // Agrega un detalle al pedido
     void agregarDetalle(Producto* prod, int cant) {
-        DetallePedido det(prod, cant);
+        ItemPedido det(prod, cant);
         detalles.push_back(det);
     }
 

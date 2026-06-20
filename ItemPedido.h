@@ -7,6 +7,7 @@ class ItemPedido {
 public:
 	// declaramos los atributos como publicos para poder acceder a ellos desde otras 
 	// clases como Carrito y Pedido
+	// prueba de encapsulamiento: si los declaramos como privados, no podremos acceder a ellos desde otras clases
 	Producto* producto;
 	double precioUnitario;
 	int cantidad;

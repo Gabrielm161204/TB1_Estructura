@@ -42,7 +42,7 @@ public:
         contadorPedidos++;
         Pedido pedido(contadorPedidos, nombre, fecha);
 
-        vector<ItemCarrito>& items = carrito.getItems();
+        vector<ItemPedido>& items = carrito.getItems();
         for (int i = 0; i < items.size(); i++) {
             pedido.agregarDetalle(items[i].producto, items[i].cantidad);
         }
