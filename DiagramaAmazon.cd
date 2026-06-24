@@ -35,13 +35,6 @@
       <FileName>Cola.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DetallePedido" Collapsed="true">
-    <Position X="11.75" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AQAAAAAAAABAAIAEAAAAAABAAAAAABAAAAAAAAAAAAA=</HashCode>
-      <FileName>DetallePedido.h</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="GestorInventario" Collapsed="true">
     <Position X="6.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
@@ -54,13 +47,6 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAABECAAKgAAAAAAAAAYAAAAQAAgAAAAAAAA=</HashCode>
       <FileName>Historial.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ItemCarrito" Collapsed="true">
-    <Position X="10" Y="1.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AQAAAAAAAABQAAAEAAAAAABAAAAAABAAAAAAAABAAAA=</HashCode>
-      <FileName>ItemCarrito.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Marketplace" Collapsed="true">

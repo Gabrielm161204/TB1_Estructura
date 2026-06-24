@@ -17,8 +17,7 @@ using namespace std;
 #include "NodoProducto.h"
 #include "GestorInventario.h"
 #include "Categoria.h"
-#include "ItemCarrito.h"
-#include "DetallePedido.h"
+
 #include "Pedido.h"
 #include "Historial.h"
 #include "Carrito.h"

@@ -115,10 +115,8 @@
     <ClInclude Include="Categoria.h" />
     <ClInclude Include="Cliente.h" />
     <ClInclude Include="Cola.h" />
-    <ClInclude Include="DetallePedido.h" />
     <ClInclude Include="GestorInventario.h" />
     <ClInclude Include="Historial.h" />
-    <ClInclude Include="ItemCarrito.h" />
     <ClInclude Include="ItemPedido.h" />
     <ClInclude Include="Marketplace.h" />
     <ClInclude Include="MetodoPago.h" />
