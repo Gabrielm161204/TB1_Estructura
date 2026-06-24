@@ -19,11 +19,11 @@ public:
 
     // Muestra la informacion del producto
     void mostrarInfo() {
-        cout << "  Nombre   : " << nombre << endl;
-        cout << "  Stock    : " << stock << " unidades" << endl;
+        cout << "  Nombre: " << nombre << endl;
+        cout << "  Stock: " << stock << " und." << endl;
         cout << "  Categoria: " << categoria << endl;
-        cout << "  Precio   : S/. " << precio << endl;
-        cout << "  Estado   : " << (estado && stock > 0 ? "Disponible" : "Agotado") << endl;
+        cout << "  Precio: S/. " << precio << endl;
+        cout << "  Estado: " << (estado && stock > 0 ? "Disponible" : "Agotado") << endl;
     }
 
     // Verifica si el producto se puede vender

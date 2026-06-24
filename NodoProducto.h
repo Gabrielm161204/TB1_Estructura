@@ -3,10 +3,11 @@
 #include "Producto.h"
 
 class NodoProducto {
-public: 
-	Producto producto;
-	NodoProducto* siguiente;
 public:
-	NodoProducto (){ }
+	Producto  producto;
+	NodoProducto* siguiente;
+
+public:
+	NodoProducto() {}
 	~NodoProducto () { }
 };

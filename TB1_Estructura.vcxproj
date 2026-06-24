@@ -115,6 +115,7 @@
     <ClInclude Include="Categoria.h" />
     <ClInclude Include="Cliente.h" />
     <ClInclude Include="Cola.h" />
+    <ClInclude Include="GeneradorData.h" />
     <ClInclude Include="GestorInventario.h" />
     <ClInclude Include="HashTable.h" />
     <ClInclude Include="Historial.h" />
