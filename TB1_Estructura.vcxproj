@@ -129,6 +129,7 @@
     <ClInclude Include="Pila.h" />
     <ClInclude Include="Producto.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Sistema.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
