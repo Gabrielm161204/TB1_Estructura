@@ -2,12 +2,14 @@
 
 #include "NodoProducto.h"
 #include "Ordenamientos.h"
-
+#include "HashTable.h"
+        
 
 class GestorInventario {
 private:
     NodoProducto* cabeza;   // Primer nodo de la lista
     int cantidad;
+	HashTable<Producto*> indicePorNombre; // Tabla hash para busqueda rapida por nombre
 
     // RECURSIVIDAD: busca un producto por nombre recorriendo la lista
     NodoProducto* buscarRecursivo(NodoProducto* nodo, string& nombre) {
@@ -33,7 +35,7 @@ private:
     }
 
 public:
-    GestorInventario() : cabeza(nullptr), cantidad(0) {}
+    GestorInventario() : cabeza(nullptr), cantidad(0), indicePorNombre(211) {}
 
     ~GestorInventario() {
         NodoProducto* actual = cabeza;
@@ -58,12 +60,14 @@ public:
 
         Producto p(nom, st, cat, prec);
 
-        // Insercion al inicio de la lista enlazada (caso especial)
         NodoProducto* nuevo = new NodoProducto;
         nuevo->producto = p;
         nuevo->siguiente = cabeza;
         cabeza = nuevo;
         cantidad++;
+
+        // índice hash: clave = nombre, valor = puntero al producto
+        indicePorNombre.insertar(nom, &nuevo->producto);
 
         cout << "  [OK] Producto '" << nom << "' registrado." << endl;
     }
@@ -75,6 +79,8 @@ public:
         nuevo->siguiente = cabeza;
         cabeza = nuevo;
         cantidad++;
+
+        indicePorNombre.insertar(p.nombre, &nuevo->producto);
     }
 
     // Muestra todos los productos usando RECURSIVIDAD
@@ -104,9 +110,16 @@ public:
 
     // Busca y retorna puntero (para uso interno de otras clases)
     Producto* buscarPorNombre(string& nombre) {
-        NodoProducto* resultado = buscarRecursivo(cabeza, nombre);
+        /*NodoProducto* resultado = buscarRecursivo(cabeza, nombre);
         if (resultado) return &resultado->producto;
-        return nullptr;
+        return nullptr;*/
+        
+        Producto* ptr = nullptr;
+        if (indicePorNombre.encontrado(nombre, ptr)) {
+            return ptr; // encontrado en O(1) promedio
+        }
+        return nullptr; // no encontrado
+        
     }
 
     // Actualizar stock de un producto
@@ -137,6 +150,8 @@ public:
 
         // Caso especial: el producto esta al inicio (cabeza)
         if (cabeza->producto.nombre == nombre) {
+            indicePorNombre.borrar(nombre);   // quitar del hash
+
             NodoProducto* temp = cabeza;
             cabeza = cabeza->siguiente;
             delete temp;
@@ -150,6 +165,8 @@ public:
         NodoProducto* actual = cabeza->siguiente;
         while (actual != nullptr) {
             if (actual->producto.nombre == nombre) {
+                indicePorNombre.borrar(nombre);   // quitar del hash
+
                 anterior->siguiente = actual->siguiente;
                 delete actual;
                 cantidad--;
