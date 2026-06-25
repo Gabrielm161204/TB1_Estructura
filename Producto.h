@@ -1,57 +1,40 @@
-
 #pragma once
 using namespace System;
 
-/**
- * @class Producto
- * @brief Representa un producto disponible en el marketplace.
- *
- * Contiene la información básica de un producto: nombre, stock,
- * categoría, precio y estado de disponibilidad. Provee métodos
- * para consultar su disponibilidad y mostrar su información.
+/*
+ * Clase: Producto
+ * Representa un producto disponible en el marketplace.
+ * Contiene informacion basica como nombre, stock, categoria,
+ * precio y estado de disponibilidad.
  */
 class Producto {
 public:
-    /// Nombre del producto.
-    string nombre;
+    string nombre;      // Nombre del producto
+    int stock;          // Cantidad de unidades disponibles en inventario
+    string categoria;   // Categoria a la que pertenece el producto
+    double precio;      // Precio unitario en soles (S/.)
+    bool estado;        // true = disponible, false = no disponible
 
-    /// Cantidad de unidades disponibles en inventario.
-    int stock;
-
-    /// Categoría a la que pertenece el producto.
-    string categoria;
-
-    /// Precio unitario del producto en soles (S/.).
-    double precio;
-
-    /// Estado del producto: true = disponible, false = no disponible.
-    bool estado;
-
-    /**
-     * @brief Constructor por defecto.
-     *
-     * Inicializa el producto con valores vacíos/cero y estado disponible.
+    /*
+     * Constructor por defecto.
+     * Inicializa el producto con valores vacios/cero y estado disponible.
      */
     Producto() : nombre(""), stock(0), categoria(""), precio(0.0), estado(true) {}
 
-    /**
-     * @brief Constructor con parámetros.
-     *
-     * @param nom   Nombre del producto.
-     * @param st    Stock inicial del producto.
-     * @param cat   Categoría del producto.
-     * @param prec  Precio unitario del producto.
-     * @param est   Estado del producto (true por defecto = disponible).
+    /*
+     * Constructor con parametros.
+     * Recibe el nombre, stock, categoria, precio y estado del producto.
+     * El estado es true (disponible) por defecto si no se especifica.
      */
     Producto(string nom, int st, string cat, double prec, bool est = true)
         : nombre(nom), stock(st), categoria(cat), precio(prec), estado(est) {
     }
 
-    /**
-     * @brief Muestra en consola la información completa del producto.
-     *
-     * Imprime nombre, stock, categoría, precio y estado (Disponible/Agotado).
-     * El producto se considera agotado si el estado es false o el stock es 0.
+    /*
+     * Muestra en consola la informacion completa del producto:
+     * nombre, stock, categoria, precio y estado.
+     * El estado se muestra como "Disponible" o "Agotado" segun
+     * si el estado es true y el stock es mayor a cero.
      */
     void mostrarInfo() {
         cout << "Nombre   : " << nombre << endl;
@@ -61,13 +44,10 @@ public:
         cout << "Estado   : " << (estado && stock > 0 ? "Disponible" : "Agotado") << endl;
     }
 
-    /**
-     * @brief Verifica si el producto puede ser vendido.
-     *
-     * Un producto está disponible solo si su estado es true
-     * y su stock es mayor a cero.
-     *
-     * @return true si el producto está disponible para la venta, false en caso contrario.
+    /*
+     * Verifica si el producto puede ser vendido.
+     * Retorna true solo si el estado es true y el stock es mayor a cero.
+     * Retorna false en caso contrario.
      */
     bool estaDisponible() {
         return estado && stock > 0;
