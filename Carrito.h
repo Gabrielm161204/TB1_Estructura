@@ -2,23 +2,45 @@
 
 #include "ItemPedido.h"
 
+/*
+ Clase: Carrito
+ Representa el carrito de compras de un cliente en el marketplace.
+ Almacena una lista de items (productos con cantidad) y calcula
+ el total de la compra. Utiliza funciones lambda para operaciones
+ de suma y validacion de stock.
+*/
 class Carrito {
 private:
-    string nombreCliente;
-    vector<ItemPedido> items;
-    double total;
+    string nombreCliente;       // Nombre del cliente dueno del carrito
+    vector<ItemPedido> items;   // Lista de productos agregados al carrito
+    double total;               // Total acumulado de la compra en soles
 
 public:
+
+    /*
+     Constructor por defecto.
+     Inicializa el carrito sin cliente y con total en cero.
+    */
     Carrito() {
-		nombreCliente = "";
-		total = 0.0;
-    }
-    Carrito(string cliente) {
-		nombreCliente = cliente;
-		total = 0.0;
+        nombreCliente = "";
+        total = 0.0;
     }
 
-    // Agrega un producto al carrito
+    /*
+     Constructor con nombre de cliente.
+     Asigna el nombre del cliente al carrito y total en cero.
+    */
+    Carrito(string cliente) {
+        nombreCliente = cliente;
+        total = 0.0;
+    }
+
+    /*
+     Agrega un producto al carrito con la cantidad indicada.
+     Si el producto no esta disponible o no hay stock suficiente, muestra un mensaje de error.
+     Si el producto ya existe en el carrito, actualiza su cantidad.
+     Al finalizar, recalcula el total.
+    */
     void agregarProducto(Producto* prod, int cantidad) {
         if (!prod->estaDisponible()) {
             cout << "  [!] El producto '" << prod->nombre << "' no esta disponible." << endl;
@@ -43,13 +65,18 @@ public:
         cout << "  [OK] '" << prod->nombre << "' agregado al carrito." << endl;
     }
 
-    // Muestra el contenido del carrito
+    /*
+     Muestra en consola el contenido del carrito.
+     Lista cada item con su numero, nombre y subtotal.
+     Al final muestra el total acumulado en soles.
+     Si el carrito esta vacio, muestra un mensaje informativo.
+    */
     void mostrarCarrito() {
         if (items.empty()) {
             cout << "  El carrito esta vacio." << endl;
             return;
         }
-        cout << "  ===== CARRITO DE " << nombreCliente << " =====" << endl<<endl;
+        cout << "  ===== CARRITO DE " << nombreCliente << " =====" << endl << endl;
         for (int i = 0; i < items.size(); i++) {
             cout << "  [" << i + 1 << "] ";
             items[i].mostrar();
@@ -58,25 +85,32 @@ public:
         cout << "  TOTAL: S/." << total << endl;
     }
 
-    // Calcula el total usando LAMBDA
+    /*
+     Calcula el total del carrito sumando los subtotales de cada item.
+     Utiliza una funcion lambda anonima para acumular los subtotales.
+    */
     void calcularTotal() {
         // Lambda: funcion anonima que acumula subtotales
         auto sumarSubtotales = [&]() {
             double suma = 0.0;
-            for (int i = 0; i < items.size(); i++) { 
+            for (int i = 0; i < items.size(); i++) {
                 suma += items[i].getSubtotal();
             }
             return suma;
-            };
+        };
         total = sumarSubtotales();
     }
 
-    // Valida que todos los items tengan stock suficiente
+    /*
+     Valida que todos los items del carrito tengan stock suficiente.
+     Usa una lambda para verificar cada item individualmente.
+     Retorna true si todos los items tienen stock, false si alguno no lo tiene.
+    */
     bool validarStock() {
         // LAMBDA: verifica si algun item supera el stock disponible
-        auto tieneStockSuficiente = []( ItemPedido& item) {
+        auto tieneStockSuficiente = [](ItemPedido& item) {
             return item.cantidad <= item.producto->stock;
-            };
+        };
 
         for (int i = 0; i < items.size(); i++) {
             if (!tieneStockSuficiente(items[i])) {
@@ -87,7 +121,10 @@ public:
         return true;
     }
 
-    // Descuenta el stock al confirmar compra
+    /*
+     Descuenta el stock de cada producto al confirmar la compra.
+     Si el stock llega a cero, el producto se marca como no disponible.
+    */
     void descontarStock() {
         for (int i = 0; i < items.size(); i++) {
             items[i].producto->stock -= items[i].cantidad;
@@ -96,11 +133,18 @@ public:
         }
     }
 
+    // Vacia el carrito y reinicia el total a cero
     void vaciar() { items.clear(); total = 0.0; }
 
+    // Retorna true si el carrito no tiene ningun item
     bool estaVacio() { return items.empty(); }
+
+    // Retorna el total acumulado del carrito
     double getTotal() { return total; }
+
+    // Retorna la lista de items del carrito por referencia
     vector<ItemPedido>& getItems() { return items; }
+
+    // Retorna el nombre del cliente dueno del carrito
     string getNombreCliente() { return nombreCliente; }
 };
-
