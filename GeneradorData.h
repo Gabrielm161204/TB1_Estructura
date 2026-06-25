@@ -24,8 +24,8 @@ public:
 		for (int i = 1; i <= cantidad; i++) {
 			string nombre = "Producto_" + to_string(i);
 			int stock = rand() % 100 + 1; // Stock aleatorio entre 1 y 100
-			string categoria = (i % 3 == 0) ? "Electronica" : (i % 3 == 1) ? "Ropa" : "Accesorios";
-			double precio = (rand() % 200 + 10) * 1.5; // Precio aleatorio entre 10 y 210
+			string categoria = (i % 3 == 0) ? "Electronica" : (i % 3 == 1) ? "Ropa" :   "Accesorios";
+			double precio = (rand() % 200 + 10) * 1.5; // Precio a(i % 3 == 1) ?leatorio entre 10 y 210
 			inventario.registrarProductoDirecto(Producto(nombre, stock, categoria, precio));
 		}
 	}
@@ -34,6 +34,7 @@ public:
 		market.agregarCategoria(Categoria(1, "Electronica", "Dispositivos electronicos y accesorios"));
 		market.agregarCategoria(Categoria(2, "Ropa", "Ropa y calzado para toda la familia"));
 		market.agregarCategoria(Categoria(3, "Accesorios", "Mochilas, bolsos y accesorios varios"));
+		//market.agregarCategoria(Categoria(4, "Libros", "Libros de diferentes generos y accesorios de ellos"));
 	}
 	void generarProductos(GestorInventario& inventario, Marketplace& market) {
 		inventario.registrarProductoDirecto(Producto("Laptop HP", 15, "Electronica", 2500.00));

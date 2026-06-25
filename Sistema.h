@@ -104,42 +104,52 @@ public:
     void menuInventario() {
         int op;
         do {
-            cout << "=============================\n" << endl;
+            cout << "=============================" << endl;
             cout << "  GESTION DE INVENTARIO" << endl;
             cout << "=============================" << endl;
             cout << "1. Registrar producto" << endl;
-            cout << "2. Mostrar productos (recursivo)" << endl;
-            cout << "3. Buscar producto (recursivo)" << endl;
-            cout << "4. Actualizar stock" << endl;
-            cout << "5. Eliminar producto" << endl;
-            cout << "6. Ordenar por precio (Bubble Sort)" << endl;
-            cout << "7. Ordenar por precio (Quick Sort)" << endl;
+			cout << "2. Generar n productos" << endl;
+            cout << "3. Mostrar productos (recursivo)" << endl;
+            cout << "4. Buscar producto (tabla hash)" << endl;
+            cout << "5. Actualizar stock" << endl;
+            cout << "6. Eliminar producto" << endl;
+            cout << "7. Ordenar por precio (Bubble Sort)" << endl;
+            cout << "8. Ordenar por precio (Quick Sort)" << endl;
             cout << "0. Volver" << endl;
             cout << "Opcion: "; cin >> op;
 
             switch (op) {
             case 1:
+                
                 inventario.registrarProducto();
                 clienteActual.pilaAcciones.push("Registro de producto");
                 break;
-            case 2:
+            case 2: {
+                int n;
+                cout << "  Cantidad de productos a generar: "; cin >> n;
+                generador.CargarCantidadProductos(inventario, n);
+                clienteActual.pilaAcciones.push("Generacion de " + to_string(n) + " productos");
+				cout << "se generaron los " << n << " productos correctamente" << endl;
+                break;
+			}
+            case 3:
                 inventario.mostrarProductosRegistrados();
                 break;
-            case 3:
+            case 4:
                 inventario.buscarProducto();
                 break;
-            case 4:
+            case 5:
                 inventario.actualizarProducto();
                 clienteActual.pilaAcciones.push("Actualizacion de stock");
                 break;
-            case 5:
+            case 6:
                 inventario.eliminarProducto();
                 clienteActual.pilaAcciones.push("Eliminacion de producto");
                 break;
-            case 6:
+            case 7:
                 inventario.ordenarPorPrecio();
                 break;
-            case 7:
+            case 8:
                 inventario.ordenarQuickSort();
                 break;
             case 0: break;
@@ -154,7 +164,7 @@ public:
     void menuMarketplace() {
         int op;
         do {
-            cout << "=============================\n" << endl;
+            cout << "=============================" << endl;
             cout << "    MARKETPLACE: " << market.nombre << endl;
             cout << "=============================" << endl;
             cout << "1. Ver todos los productos (aleatorio Fisher-Yates)" << endl;

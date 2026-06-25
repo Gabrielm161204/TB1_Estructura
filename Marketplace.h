@@ -21,11 +21,12 @@ public:
         categorias.push_back(cat);
     }
 
-    // Muestra todos los productos con Fisher-Yates (orden aleatorio)
+    // Muestra todos los productos con Fisher-Yates (orden aleatorio),
+    // en una cuadricula de columnas usando Console::SetCursorPosition
     void mostrarMercado() {
-        cout << "\n  ===== " << nombre << " =====" << endl;
         vector<Producto*> productos = gestor->getProductosDisponibles();
         if (productos.empty()) {
+            cout << "\n  ===== " << nombre << " =====" << endl;
             cout << "  No hay productos disponibles." << endl;
             return;
         }
@@ -33,11 +34,24 @@ public:
         // FISHER-YATES: mezcla los productos antes de mostrar
         fisherYates(productos);
 
-        cout << "  Mostrando " << productos.size() << " productos (orden aleatorio):\n" << endl;
-        for (int i = 0; i < productos.size(); i++) {
-            cout << "  [" << i + 1 << "]" << endl;
+        const int columnas = 3;
+        const int anchoBloque = 26;
+        const int altoBloque = 7;
+        const int yInicial = 4;
+
+        Console::Clear();
+        cout << "  ===== " << nombre << " =====" << endl;
+        cout << "  Mostrando " << productos.size() << " productos (orden aleatorio):" << endl;
+
+        for (int i = 0; i < (int)productos.size(); i++) {
+            int col = i % columnas;
+            int fila = i / columnas;
+            int x = col * anchoBloque;
+            int y = yInicial + fila * altoBloque;
+
+            //Console::SetCursorPosition(x, y);
+            cout << "[" << i + 1 << "]";
             productos[i]->mostrarInfo();
-            cout << endl;
         }
     }
 
