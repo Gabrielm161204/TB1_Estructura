@@ -1,9 +1,11 @@
 #pragma once
 
-
-// --- Bubble Sort (Burbuja) ---
-// Compara pares adyacentes e intercambia si estan en orden incorrecto
-// Complejidad: O(n^2)
+/*
+ Funcion: bubbleSort
+ Ordena un vector de doubles usando el algoritmo Bubble Sort (burbuja).
+ Compara pares adyacentes e intercambia si estan en orden incorrecto.
+ Complejidad: O(n^2) en todos los casos.
+*/
 void bubbleSort(vector<double>& arr) {
     int n = arr.size();
     for (int i = 0; i < n - 1; i++) {
@@ -17,9 +19,12 @@ void bubbleSort(vector<double>& arr) {
     }
 }
 
-// --- Selection Sort (Seleccion) ---
-// Busca el minimo y lo coloca al inicio en cada iteracion
-// Complejidad: O(n^2)
+/*
+ Funcion: selectionSort
+ Ordena un vector de doubles usando el algoritmo Selection Sort (seleccion).
+ En cada iteracion busca el minimo del subarreglo no ordenado y lo coloca al inicio.
+ Complejidad: O(n^2) en todos los casos.
+*/
 void selectionSort(vector<double>& arr) {
     int n = arr.size();
     for (int i = 0; i < n - 1; i++) {
@@ -33,9 +38,12 @@ void selectionSort(vector<double>& arr) {
     }
 }
 
-// --- Insertion Sort (Insercion) ---
-// Inserta cada elemento en su posicion correcta dentro de la parte ordenada
-// Complejidad: O(n^2) peor caso, O(n) mejor caso
+/*
+ Funcion: insertionSort
+ Ordena un vector de doubles usando el algoritmo Insertion Sort (insercion).
+ Inserta cada elemento en su posicion correcta dentro de la parte ya ordenada.
+ Complejidad: O(n^2) peor caso, O(n) mejor caso (arreglo casi ordenado).
+*/
 void insertionSort(vector<double>& arr) {
     int n = arr.size();
     for (int i = 1; i < n; i++) {
@@ -49,9 +57,13 @@ void insertionSort(vector<double>& arr) {
     }
 }
 
-// --- Quick Sort (Recursivo) ---
-// RECURSIVIDAD: la funcion se llama a si misma con subproblemas mas pequenos
-// Complejidad: O(n log n) promedio
+/*
+ Funcion: particion
+ Funcion auxiliar del Quick Sort.
+ Coloca el pivote (ultimo elemento) en su posicion correcta
+ y reorganiza los elementos: menores a la izquierda, mayores a la derecha.
+ Retorna el indice final del pivote.
+*/
 int particion(vector<double>& arr, int bajo, int alto) {
     double pivote = arr[alto];
     int i = bajo - 1;
@@ -65,34 +77,45 @@ int particion(vector<double>& arr, int bajo, int alto) {
     return i + 1;
 }
 
+/*
+ Funcion: quickSort
+ Ordena un vector de doubles usando el algoritmo Quick Sort de forma recursiva.
+ Divide el arreglo en dos subarreglos respecto al pivote y los ordena recursivamente.
+ Complejidad: O(n log n) promedio, O(n^2) peor caso.
+*/
 void quickSort(vector<double>& arr, int bajo, int alto) {
     if (bajo < alto) {
         int pi = particion(arr, bajo, alto);
-        quickSort(arr, bajo, pi - 1);   // Recursion izquierda
-        quickSort(arr, pi + 1, alto);   // Recursion derecha
+        quickSort(arr, bajo, pi - 1);   // Recursion sobre el subarreglo izquierdo
+        quickSort(arr, pi + 1, alto);   // Recursion sobre el subarreglo derecho
     }
 }
 
-// ============================================================
-// FISHER-YATES SHUFFLE
-// Genera permutacion aleatoria sin sesgo - O(n)
-// ============================================================
+/*
+ Funcion: fisherYates
+ Genera una permutacion aleatoria sin sesgo del vector usando el algoritmo Fisher-Yates.
+ Recorre el arreglo de atras hacia adelante e intercambia cada elemento
+ con uno en una posicion aleatoria dentro del rango [0, i].
+ Complejidad: O(n).
+*/
 template<typename T>
 void fisherYates(vector<T>& arr) {
     srand((unsigned int)time(0));
     int n = arr.size();
     for (int i = n - 1; i > 0; i--) {
-        int j = rand() % (i + 1);   // indice aleatorio entre 0 e i
+        int j = rand() % (i + 1);
         T temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
 }
 
-// Mostrar vector de doubles
-void mostrarVector( vector<double>& arr, string titulo) {
+/*
+ Funcion: mostrarVector
+ Muestra en consola los elementos de un vector de doubles con un titulo.
+*/
+void mostrarVector(vector<double>& arr, string titulo) {
     cout << titulo << ": [ ";
     for (double x : arr) cout << x << " ";
     cout << "]" << endl;
 }
-

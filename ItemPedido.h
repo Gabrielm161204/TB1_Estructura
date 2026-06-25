@@ -3,38 +3,51 @@
 #include "conio.h"
 #include "Producto.h"
 using namespace std;
+
+/*
+ Clase: ItemPedido
+ Representa un item dentro de un pedido o carrito de compras.
+ Contiene un puntero al producto, la cantidad solicitada
+ y el precio unitario al momento de agregarlo.
+*/
 class ItemPedido {
 public:
-	// declaramos los atributos como publicos para poder acceder a ellos desde otras 
-	// clases como Carrito y Pedido
-	// prueba de encapsulamiento: si los declaramos como privados, no podremos acceder a ellos desde otras clases
-	Producto* producto;
-	double precioUnitario;
-	int cantidad;
-public:
-	// Constructor por defecto sin parámetros
-	ItemPedido() : producto(nullptr), precioUnitario(0), cantidad(0) {}
-	// Constructor con parámetros
-	// le pasamos un puntero al producto y la cantidad que se desea comprar
-	ItemPedido(Producto* prod, int cant) : producto(prod), cantidad(cant),
-		precioUnitario(prod->precio) {}
+    Producto* producto;       // Puntero al producto asociado a este item
+    double precioUnitario;    // Precio unitario del producto al momento de agregar al carrito
+    int cantidad;             // Cantidad de unidades del producto en este item
 
-	~ItemPedido() {}
+    /*
+     Constructor por defecto.
+     Inicializa el item sin producto y con valores en cero.
+    */
+    ItemPedido() : producto(nullptr), precioUnitario(0), cantidad(0) {}
 
-	double getSubtotal() {
-		return cantidad * precioUnitario;
-	}
+    /*
+     Constructor con parametros.
+     Recibe un puntero al producto y la cantidad deseada.
+     El precio unitario se toma directamente del producto.
+    */
+    ItemPedido(Producto* prod, int cant) : producto(prod), cantidad(cant),
+        precioUnitario(prod->precio) {}
 
-	void setCantidad(int n) {
-		cantidad = n;
-	}
+    // Destructor por defecto
+    ~ItemPedido() {}
 
-	void mostrar() {
-		cout<< "  " << producto->nombre
-			<< " | Cant: " << cantidad
-			<< " | Precio unit: S/." << precioUnitario
-			<< " | Subtotal: S/." << getSubtotal() << endl;
-	}
+    // Calcula y retorna el subtotal (cantidad * precioUnitario)
+    double getSubtotal() {
+        return cantidad * precioUnitario;
+    }
 
+    // Actualiza la cantidad del item
+    void setCantidad(int n) {
+        cantidad = n;
+    }
 
+    // Muestra en consola el nombre, cantidad, precio unitario y subtotal del item
+    void mostrar() {
+        cout << "  " << producto->nombre
+            << " | Cant: " << cantidad
+            << " | Precio unit: S/." << precioUnitario
+            << " | Subtotal: S/." << getSubtotal() << endl;
+    }
 };

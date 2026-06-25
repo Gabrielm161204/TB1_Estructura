@@ -5,24 +5,38 @@
 #include "Ordenamientos.h"
 #include "Cola.h"
 
-
+/*
+ Clase: Marketplace
+ Representa la tienda virtual del sistema.
+ Gestiona las categorias disponibles, accede al inventario
+ y provee funciones para mostrar productos (con orden aleatorio,
+ por categoria o por precio). Usa una cola para gestionar
+ los IDs de pedidos pendientes de procesar.
+*/
 class Marketplace {
 public:
-    string nombre;
-    GestorInventario* gestor;     // Puntero al inventario global
-    vector<Categoria> categorias;
-    Cola<int> colaPedidos;        // Cola de IDs de pedidos por procesar
+    string nombre;                    // Nombre del marketplace
+    GestorInventario* gestor;         // Puntero al inventario global de productos
+    vector<Categoria> categorias;     // Lista de categorias disponibles
+    Cola<int> colaPedidos;            // Cola de IDs de pedidos pendientes de procesar
 
+    // Constructor por defecto
     Marketplace() : nombre(""), gestor(nullptr) {}
+
+    // Constructor con nombre del marketplace y puntero al inventario
     Marketplace(string nom, GestorInventario* g) : nombre(nom), gestor(g) {}
 
-    // Registra una categoria
+    // Agrega una nueva categoria al marketplace
     void agregarCategoria(Categoria cat) {
         categorias.push_back(cat);
     }
 
-    // Muestra todos los productos con Fisher-Yates (orden aleatorio),
-    // en una cuadricula de columnas usando Console::SetCursorPosition
+    /*
+     Muestra todos los productos disponibles en orden aleatorio.
+     Aplica el algoritmo Fisher-Yates para mezclar los productos
+     antes de mostrarlos en consola en formato de cuadricula.
+     Si no hay productos disponibles, muestra un mensaje informativo.
+    */
     void mostrarMercado() {
         vector<Producto*> productos = gestor->getProductosDisponibles();
         if (productos.empty()) {
@@ -31,7 +45,6 @@ public:
             return;
         }
 
-        // FISHER-YATES: mezcla los productos antes de mostrar
         fisherYates(productos);
 
         const int columnas = 3;
@@ -48,21 +61,23 @@ public:
             int fila = i / columnas;
             int x = col * anchoBloque;
             int y = yInicial + fila * altoBloque;
-
-            //Console::SetCursorPosition(x, y);
             cout << "[" << i + 1 << "]";
             productos[i]->mostrarInfo();
         }
     }
 
-    // Muestra productos filtrados por categoria usando LAMBDA
+    /*
+     Muestra los productos disponibles que pertenecen a una categoria especifica.
+     Usa una funcion lambda para filtrar los productos por categoria.
+     Si no se encuentran productos en la categoria, muestra un mensaje informativo.
+    */
     void mostrarPorCategoria(string& catBuscada) {
         vector<Producto*> todos = gestor->getProductosDisponibles();
 
-        // LAMBDA: filtra productos cuya categoria coincida
+        // Lambda: filtra productos cuya categoria coincida con la buscada
         auto esDeLaCategoria = [&catBuscada](Producto* p) {
             return p->categoria == catBuscada;
-            };
+        };
 
         cout << " === Productos de categoria: " << endl << catBuscada << " ===" << endl;
         bool encontro = false;
@@ -76,7 +91,7 @@ public:
         if (!encontro) cout << "  No hay productos en esa categoria." << endl;
     }
 
-    // Muestra las categorias disponibles
+    // Muestra en consola todas las categorias registradas en el marketplace
     void mostrarCategorias() {
         cout << "\n  === Categorias ===" << endl;
         for (int i = 0; i < categorias.size(); i++) {
@@ -84,12 +99,16 @@ public:
         }
     }
 
-    // Muestra productos ordenados por precio (usa Insertion Sort + Lambda de comparacion)
+    /*
+     Muestra los productos disponibles ordenados por precio de menor a mayor.
+     Aplica Insertion Sort sobre los punteros usando el precio como criterio.
+     Si no hay productos, muestra un mensaje informativo.
+    */
     void mostrarOrdenadosPorPrecio() {
         vector<Producto*> productos = gestor->getProductosDisponibles();
         if (productos.empty()) { cout << "  Sin productos." << endl; return; }
 
-        // Insertion Sort sobre punteros usando precio
+        // Insertion Sort sobre punteros usando precio como criterio
         int n = productos.size();
         for (int i = 1; i < n; i++) {
             Producto* key = productos[i];

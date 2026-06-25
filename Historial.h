@@ -3,26 +3,38 @@
 #include "Pedido.h"
 #include "iostream"
 
+/*
+ Clase: NodoHistorial
+ Nodo de la lista doblemente enlazada usada en el Historial.
+ Almacena un pedido y punteros al nodo anterior y siguiente.
+*/
 class NodoHistorial {
 public:
-    Pedido pedido;
-    NodoHistorial* siguiente;
-    NodoHistorial* anterior;
-}; 
+    Pedido pedido;               // Pedido almacenado en este nodo
+    NodoHistorial* siguiente;    // Puntero al nodo siguiente
+    NodoHistorial* anterior;     // Puntero al nodo anterior
+};
 
-// ============================================================
-// Clase Historial: usa LISTA ENLAZADA DOBLE de Pedidos
-// Permite recorrer hacia adelante Y hacia atras
-// ============================================================
+/*
+ Clase: Historial
+ Almacena el historial de compras de un cliente usando
+ una lista doblemente enlazada de pedidos.
+ Permite recorrer los pedidos hacia adelante y hacia atras,
+ y calcula el total gastado de forma recursiva.
+*/
 class Historial {
 private:
-    NodoHistorial* cabeza;   // Primer nodo
-    NodoHistorial* cola;     // Ultimo nodo (caso especial de lista doble)
+    NodoHistorial* cabeza;   // Puntero al primer nodo de la lista
+    NodoHistorial* cola;     // Puntero al ultimo nodo de la lista
 
 public:
-    double totalGastado;
-    int cantidadCompras;
+    double totalGastado;     // Suma acumulada del total de todos los pedidos
+    int cantidadCompras;     // Cantidad total de pedidos registrados
 
+    /*
+     Constructor por defecto.
+     Inicializa la lista vacia con totalGastado y cantidadCompras en cero.
+    */
     Historial() {
         cabeza = nullptr;
         cola = nullptr;
@@ -30,6 +42,10 @@ public:
         cantidadCompras = 0;
     }
 
+    /*
+     Destructor.
+     Libera la memoria de todos los nodos de la lista.
+    */
     ~Historial() {
         NodoHistorial* actual = cabeza;
         while (actual != nullptr) {
@@ -39,7 +55,11 @@ public:
         }
     }
 
-    // Agrega un pedido al final de la lista doble
+    /*
+     Agrega un pedido al final de la lista doblemente enlazada.
+     Si la lista esta vacia, el nodo es cabeza y cola al mismo tiempo.
+     Actualiza totalGastado y cantidadCompras.
+    */
     void agregarPedido(Pedido p) {
         NodoHistorial* nuevo = new NodoHistorial;
         nuevo->pedido = p;
@@ -47,12 +67,10 @@ public:
         nuevo->anterior = nullptr;
 
         if (cabeza == nullptr) {
-            // Caso especial: lista vacia (primer elemento)
             cabeza = nuevo;
             cola = nuevo;
         }
         else {
-            // Insercion al final de la lista doble
             nuevo->anterior = cola;
             cola->siguiente = nuevo;
             cola = nuevo;
@@ -61,14 +79,17 @@ public:
         cantidadCompras++;
     }
 
-    // Muestra el historial de adelante hacia atras
+    /*
+     Muestra el historial de compras desde el mas reciente al mas antiguo.
+     Recorre la lista desde la cola hacia la cabeza (lista doble).
+     Al final muestra el total gastado y la cantidad de pedidos.
+    */
     void historialCompras() {
         if (cabeza == nullptr) {
             cout << "  No hay compras en el historial." << endl;
             return;
         }
         cout << "\n  ===== HISTORIAL DE COMPRAS (reciente a antiguo) =====" << endl;
-        // Recorremos desde la COLA hacia la CABEZA (lista doble)
         NodoHistorial* actual = cola;
         while (actual != nullptr) {
             actual->pedido.mostrarResumen();
@@ -79,15 +100,21 @@ public:
         cout << "  Total de pedidos: " << cantidadCompras << endl;
     }
 
-	// RECURSIVIDAD: Calcula el total gastado de forma recursiva 
+    /*
+     Calcula el total gastado de forma recursiva recorriendo la lista.
+     Caso base: nodo es nullptr, retorna 0.0.
+     Suma el total del pedido actual con el resultado de la llamada recursiva.
+    */
     double calcularTotalRecursivo(NodoHistorial* nodo) {
-        if (nodo == nullptr) return 0.0;   // Caso base
-        return nodo->pedido.total + calcularTotalRecursivo(nodo->siguiente);  // Recursion
+        if (nodo == nullptr) return 0.0;
+        return nodo->pedido.total + calcularTotalRecursivo(nodo->siguiente);
     }
 
+    // Llama a calcularTotalRecursivo desde la cabeza de la lista
     double getTotalRecursivo() {
         return calcularTotalRecursivo(cabeza);
     }
 
+    // Retorna el puntero al primer nodo del historial
     NodoHistorial* getCabeza() { return cabeza; }
 };
