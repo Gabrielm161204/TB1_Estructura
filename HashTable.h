@@ -1,13 +1,16 @@
 #pragma once
 #include "vector"
-#include "list"
+#include "list" // usamos la biblioteca lista evitar crear una clase lista generica demas
+// ya que solo necesitamos su logica de nodos
 #include "string"
 
 /*
  Clase: HashTable
  Tabla hash generica con manejo de colisiones por encadenamiento (chaining).
  Permite insertar, buscar y eliminar pares clave-valor donde la clave es
- un string y el valor es de tipo T. Usa la funcion hash polinomial de base 31.
+ un string que puede ser el nombre del producto, o cualquier string que queramos
+ y el valor es de tipo T para retornar cualquier tipo de dato. Usa la funcion hash 
+ polinomial de base 31.
 */
 template<typename T>
 class HashTable {
@@ -59,6 +62,7 @@ public:
      Busca un valor por clave en la tabla.
      Si lo encuentra, lo asigna al parametro de salida y retorna true.
      Si no lo encuentra, retorna false.
+     // Complejidad: O(n) peor caso, O(1) mejor caso
     */
     bool encontrado(string& key, T& out) {
         int idx = hashFunction(key);
