@@ -26,6 +26,7 @@ private:
     GestorInventario inventario;
     Marketplace market;
     Cliente clienteActual;
+    Ordenamientos ordenamientos;
     // Nota: la Cola de pedidos ahora vive dentro de Marketplace (market.colaPedidos)
     // Nota: la Pila de acciones ahora vive dentro de Cliente (clienteActual.pilaAcciones)
     bool clienteRegistrado = false;
@@ -74,7 +75,6 @@ public:
             cout << "3. Registrar / Ver mi perfil" << endl;
             cout << "4. Carrito de compras" << endl;
             cout << "5. Gestion de Pedidos" << endl;
-            //cout << "6. Demo de Algoritmos" << endl;
             cout << "0. Salir" << endl;
             cout << "Opcion: "; cin >> op;
 
@@ -87,8 +87,6 @@ public:
                 break;
             case 4: menuCarrito();       break;
             case 5: menuPedidos();       break;
-            case 6: //menuDemostraciones(); 
-                break;
             case 0:
                 cout << "Hasta luego!\n" << endl;
                 break;
@@ -329,77 +327,6 @@ public:
                 else {
                     cout << "No hay cliente registrado." << endl;
                 }
-                break;
-            case 0: break;
-            default: cout << "Opcion invalida." << endl;
-            }
-        } while (op != 0);
-    }
-
-    // ================================================================
-    // MENU: Demostraciones de algoritmos
-    // ================================================================
-    void menuDemostraciones() {
-        int op;
-        do {
-            cout << "=============================\n" << endl;
-            cout << "  DEMO DE ALGORITMOS" << endl;
-            cout << "=============================" << endl;
-            cout << "1. Demo Recursividad (cuenta regresiva)" << endl;
-            cout << "2. Demo Bubble Sort" << endl;
-            cout << "3. Demo Selection Sort" << endl;
-            cout << "4. Demo Insertion Sort" << endl;
-            cout << "5. Demo Quick Sort (recursivo)" << endl;
-            cout << "6. Demo Fisher-Yates" << endl;
-            cout << "7. Demo Pila (acciones realizadas)" << endl;
-            cout << "0. Volver" << endl;
-            cout << "Opcion: "; cin >> op;
-
-            vector<double> nums = { 45.0, 12.0, 78.0, 23.0, 56.0, 9.0, 34.0 };
-
-            switch (op) {
-            case 1:
-                cout << "Cuenta regresiva recursiva:\n" << endl;
-                cuentaRegresiva(5);
-                break;
-            case 2: {
-                vector<double> v = nums;
-                mostrarVector(v, "Antes");
-                bubbleSort(v);
-                mostrarVector(v, "Despues (Bubble Sort)");
-                break;
-            }
-            case 3: {
-                vector<double> v = nums;
-                mostrarVector(v, "Antes");
-                selectionSort(v);
-                mostrarVector(v, "Despues (Selection Sort)");
-                break;
-            }
-            case 4: {
-                vector<double> v = nums;
-                mostrarVector(v, "Antes");
-                insertionSort(v);
-                mostrarVector(v, "Despues (Insertion Sort)");
-                break;
-            }
-            case 5: {
-                vector<double> v = nums;
-                mostrarVector(v, "Antes");
-                quickSort(v, 0, (int)v.size() - 1);
-                mostrarVector(v, "Despues (Quick Sort)");
-                break;
-            }
-            case 6: {
-                vector<double> v = nums;
-                mostrarVector(v, "Antes");
-                fisherYates(v);
-                mostrarVector(v, "Despues (Fisher-Yates)");
-                break;
-            }
-            case 7:
-                cout << "Pila de acciones realizadas:\n" << endl;
-                clienteActual.pilaAcciones.mostrar();
                 break;
             case 0: break;
             default: cout << "Opcion invalida." << endl;

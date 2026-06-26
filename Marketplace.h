@@ -19,6 +19,7 @@ public:
     GestorInventario* gestor;         // Puntero al inventario global de productos
     vector<Categoria> categorias;     // Lista de categorias disponibles
     Cola<int> colaPedidos;            // Cola de IDs de pedidos pendientes de procesar
+	Ordenamientos ordenamientos;             // Instancia de la clase de algoritmos de ordenamiento
 
     // Constructor por defecto
     Marketplace() : nombre(""), gestor(nullptr) {}
@@ -45,7 +46,7 @@ public:
             return;
         }
 
-        fisherYates(productos);
+        ordenamientos.fisherYates(productos);
 
         const int columnas = 3;
         const int anchoBloque = 26;

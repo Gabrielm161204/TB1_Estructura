@@ -16,7 +16,7 @@ private:
     NodoProducto* cabeza;                       // Primer nodo de la lista enlazada
     int cantidad;                               // Total de productos registrados
     HashTable<Producto*> indicePorNombre;        // Indice hash para busqueda rapida por nombre
-
+    Ordenamientos ordenamientos;                 // Instancia de la clase de algoritmos de ordenamiento
     /*
      Busca un producto por nombre recorriendo la lista de forma recursiva.
      Caso base: llega al final (nullptr) o encuentra el producto.
@@ -216,7 +216,7 @@ public:
         vector<double> precios;
         NodoProducto* actual = cabeza;
         while (actual) { precios.push_back(actual->producto.precio); actual = actual->siguiente; }
-        bubbleSort(precios);
+        ordenamientos.bubbleSort(precios);
         cout << "\n Precios ordenados (Bubble Sort): ";
         for (double p : precios) cout << "S/." << p << " ";
         cout << endl;
@@ -231,7 +231,7 @@ public:
         vector<double> precios;
         NodoProducto* actual = cabeza;
         while (actual) { precios.push_back(actual->producto.precio); actual = actual->siguiente; }
-        quickSort(precios, 0, precios.size() - 1);
+        ordenamientos.quickSort(precios, 0, precios.size() - 1);
         cout << "\n Precios ordenados (Quick Sort): ";
         for (double p : precios) cout << "S/." << p << " ";
         cout << endl;
