@@ -1,5 +1,4 @@
-trabajo tipo Amazon para el curso de estructura de datos avanzados
-Esta es la TB1 por el momento - luego ir agregando lo que pide el profe
+\##trabajo tipo Amazon para el curso de estructura de datos avanzados
 
 link de los requisitos para la TB2: https:
 https://drive.google.com/file/d/1yroJGwWxFXuh4CUHn4GPmzjqBY5jW02M/view?usp=sharing
