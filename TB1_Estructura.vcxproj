@@ -123,7 +123,7 @@
     <ClInclude Include="Marketplace.h" />
     <ClInclude Include="MetodoPago.h" />
     <ClInclude Include="NodoProducto.h" />
-    <ClInclude Include="Ordenamientos.h" />
+    <ClInclude Include="Ordenamiento.h" />
     <ClInclude Include="Pedido.h" />
     <ClInclude Include="Perfil.h" />
     <ClInclude Include="Pila.h" />

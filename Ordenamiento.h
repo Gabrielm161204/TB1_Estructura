@@ -3,7 +3,7 @@
 
 // Clase con los algoritmos de ordenamiento como metodos estaticos.
 // No necesita instanciarse: se llama como Ordenamientos::bubbleSort(...), etc.
-class Ordenamientos {
+class Ordenamiento {
 public:
     // --- Bubble Sort (Burbuja) ---
     // Compara pares adyacentes e intercambia si estan en orden incorrecto

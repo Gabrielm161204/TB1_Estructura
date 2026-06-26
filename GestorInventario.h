@@ -1,7 +1,7 @@
 #pragma once
 
 #include "NodoProducto.h"
-#include "Ordenamientos.h"
+#include "Ordenamiento.h"
 #include "HashTable.h"
 
 /*
@@ -16,7 +16,7 @@ private:
     NodoProducto* cabeza;                       // Primer nodo de la lista enlazada
     int cantidad;                               // Total de productos registrados
     HashTable<Producto*> indicePorNombre;        // Indice hash para busqueda rapida por nombre
-    Ordenamientos ordenamientos;                 // Instancia de la clase de algoritmos de ordenamiento
+    Ordenamiento ordenamientos;                 // Instancia de la clase de algoritmos de ordenamiento
     /*
      Busca un producto por nombre recorriendo la lista de forma recursiva.
      Caso base: llega al final (nullptr) o encuentra el producto.

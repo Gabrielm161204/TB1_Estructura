@@ -4,7 +4,7 @@
 #include <vector>
 using namespace std;
 
-#include "Ordenamientos.h"
+#include "Ordenamiento.h"
 #include "Producto.h"
 #include "NodoProducto.h"
 #include "GestorInventario.h"
@@ -26,7 +26,7 @@ private:
     GestorInventario inventario;
     Marketplace market;
     Cliente clienteActual;
-    Ordenamientos ordenamientos;
+    Ordenamiento ordenamientos;
     // Nota: la Cola de pedidos ahora vive dentro de Marketplace (market.colaPedidos)
     // Nota: la Pila de acciones ahora vive dentro de Cliente (clienteActual.pilaAcciones)
     bool clienteRegistrado = false;
@@ -97,8 +97,8 @@ public:
 	}
 
     // ================================================================
-// MENU: Gestion de Inventario (Administrador)
-// ================================================================
+    // MENU: Gestion de Inventario (Administrador)
+    // ================================================================
     void menuInventario() {
         int op;
         do {

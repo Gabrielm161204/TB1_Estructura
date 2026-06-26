@@ -2,7 +2,7 @@
 
 #include "GestorInventario.h"
 #include "Categoria.h"
-#include "Ordenamientos.h"
+#include "Ordenamiento.h"
 #include "Cola.h"
 
 /*
@@ -19,7 +19,7 @@ public:
     GestorInventario* gestor;         // Puntero al inventario global de productos
     vector<Categoria> categorias;     // Lista de categorias disponibles
     Cola<int> colaPedidos;            // Cola de IDs de pedidos pendientes de procesar
-	Ordenamientos ordenamientos;             // Instancia de la clase de algoritmos de ordenamiento
+	Ordenamiento ordenamientos;             // Instancia de la clase de algoritmos de ordenamiento
 
     // Constructor por defecto
     Marketplace() : nombre(""), gestor(nullptr) {}

@@ -42,7 +42,7 @@
     <ClInclude Include="NodoProducto.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Ordenamientos.h">
+    <ClInclude Include="Ordenamiento.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Pedido.h">
