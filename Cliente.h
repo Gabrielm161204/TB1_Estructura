@@ -9,17 +9,18 @@
 /*
  Clase: Cliente
  Representa a un cliente registrado en el marketplace.
- Hereda de Perfil y agrega funcionalidad de carrito de compras,
+ Hereda de Perfil y agrega funcionalidad de carrito de compras ya 
+ que es necesario para asociarlo a un cliente,
  historial de pedidos y una pila de acciones realizadas.
 */
 class Cliente : public Perfil {
 private:
-    int contadorPedidos = 0;   // Contador interno para generar IDs de pedido unicos
+    int contadorPedidos = 0;   // Contador local para generar IDs de pedido unicos
 
 public:
     Carrito carrito;                 // Carrito de compras del cliente
     Historial historial;             // Historial de pedidos realizados
-    Pila<string> pilaAcciones;       // Pila de acciones realizadas (log de actividad)
+    Pila<string> pilaAcciones;       // Pila de acciones realizadas como compras (log de actividad)
 
     /*
      Constructor por defecto.
@@ -31,7 +32,7 @@ public:
     /*
      Constructor con parametros.
      Recibe nombre, DNI y fecha de registro del cliente.
-     Inicializa el carrito con el nombre del cliente.
+     Se inicializa el carrito con el nombre del cliente.
     */
     Cliente(string nom, string d, string fecha) : Perfil(nom, d, fecha), carrito(nom) {
     }

@@ -4,7 +4,7 @@
 
 /*
  Clase: GeneradorData
- Clase utilitaria encargada de precargar datos de ejemplo
+ Clase encargada de precargar datos de ejemplo
  en el inventario y el marketplace. Genera categorias y
  productos predefinidos para facilitar las pruebas del sistema.
 */
@@ -15,10 +15,7 @@ private:
 
 public:
 
-    // Constructor por defecto
     GeneradorData() {}
-
-    // Destructor por defecto
     ~GeneradorData() {}
 
     /*

@@ -11,7 +11,8 @@
 */
 class Carrito {
 private:
-    string nombreCliente;       // Nombre del cliente dueno del carrito
+	string nombreCliente;       // Nombre del cliente dueño del carrito que se 
+    //como parametro de la clase Cliente
     vector<ItemPedido> items;   // Lista de productos agregados al carrito
     double total;               // Total acumulado de la compra en soles
 
@@ -19,7 +20,7 @@ public:
 
     /*
      Constructor por defecto.
-     Inicializa el carrito sin cliente y con total en cero.
+     Inicializa el carrito sin cliente y con total igual a 0.
     */
     Carrito() {
         nombreCliente = "";
@@ -38,8 +39,8 @@ public:
     /*
      Agrega un producto al carrito con la cantidad indicada.
      Si el producto no esta disponible o no hay stock suficiente, muestra un mensaje de error.
-     Si el producto ya existe en el carrito, actualiza su cantidad.
-     Al finalizar, recalcula el total.
+     Si el producto ya existe en el carrito solo actualiza su cantidad.
+     Al finalizar, recalcula el total con el metodo calcularTotal().
     */
     void agregarProducto(Producto* prod, int cantidad) {
         if (!prod->estaDisponible()) {
@@ -67,9 +68,9 @@ public:
 
     /*
      Muestra en consola el contenido del carrito.
-     Lista cada item con su numero, nombre y subtotal.
+     Lista cada item con su numero, nombre y subtotal. 
      Al final muestra el total acumulado en soles.
-     Si el carrito esta vacio, muestra un mensaje informativo.
+     Si el carrito esta vacio se muestra "El carrito esta vacio.".
     */
     void mostrarCarrito() {
         if (items.empty()) {
@@ -90,7 +91,7 @@ public:
      Utiliza una funcion lambda anonima para acumular los subtotales.
     */
     void calcularTotal() {
-        // Lambda: funcion anonima que acumula subtotales
+        // Lambda: encargada de ir acumulando los subtotales
         auto sumarSubtotales = [&]() {
             double suma = 0.0;
             for (int i = 0; i < items.size(); i++) {
@@ -133,6 +134,7 @@ public:
         }
     }
 
+	// metodos auxiliares
     // Vacia el carrito y reinicia el total a cero
     void vaciar() { items.clear(); total = 0.0; }
 

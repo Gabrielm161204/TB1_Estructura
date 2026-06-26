@@ -49,9 +49,9 @@ public:
         int idx = hashFunction(key);
         auto& bucket = tabla[idx];
 
-        for (auto& par : bucket) {
+		for (auto& par : bucket) { // usamos auto para iterar sobre la lista de pares
             if (par.first == key) {
-                par.second = value;  // actualizar valor existente
+				par.second = value;  // si la clave ya existe actualizamos el valor
                 return;
             }
         }

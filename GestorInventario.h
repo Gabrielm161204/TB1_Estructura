@@ -59,7 +59,7 @@ public:
     /*
      Registra un nuevo producto solicitando datos por consola.
      El producto se inserta al inicio de la lista (caso especial).
-     Tambien lo agrega al indice hash para busquedas rapidas.
+     Tambien lo agrega al indice hash mediante un puntero a ese producto para busquedas rapidas.
     */
     void registrarProducto() {
         string nom, cat;
@@ -67,7 +67,7 @@ public:
         double prec;
 
         cout << " -- Registrar Producto --\n" << endl;
-        cout << " Nombre : "; cin.ignore(); getline(cin, nom);
+		cout << " Nombre : "; cin.ignore(); getline(cin, nom); // para leer nombres con espacios
         cout << " Categoria: "; getline(cin, cat);
         cout << " Stock : "; cin >> st;
         cout << " Precio : "; cin >> prec;
@@ -208,23 +208,24 @@ public:
     }
 
     /*
-     Ordena los precios del inventario usando Bubble Sort y los muestra.
-     Extrae los precios en un vector, aplica el algoritmo y los imprime en consola.
+     Ordena los precios del inventario usando insertionSort y los muestra.
+     Extrae los precios en un vector, aplica el algoritmo y los muestra en consola.
     */
     void ordenarPorPrecio() {
         if (cabeza == nullptr) return;
         vector<double> precios;
         NodoProducto* actual = cabeza;
         while (actual) { precios.push_back(actual->producto.precio); actual = actual->siguiente; }
-        ordenamientos.bubbleSort(precios);
-        cout << "\n Precios ordenados (Bubble Sort): ";
+        //ordenamientos.bubbleSort(precios);
+		ordenamientos.insertionSort(precios);
+        cout << "\n Precios ordenados (Insertion Sort): ";
         for (double p : precios) cout << "S/." << p << " ";
         cout << endl;
     }
 
     /*
      Ordena los precios del inventario usando Quick Sort y los muestra.
-     Extrae los precios en un vector, aplica el algoritmo recursivo y los imprime.
+     Extrae los precios en un vector, aplica el algoritmo recursivo y los muestra.
     */
     void ordenarQuickSort() {
         if (cabeza == nullptr) return;

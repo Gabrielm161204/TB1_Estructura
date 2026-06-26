@@ -1,8 +1,7 @@
 #pragma once
 
 
-// Clase con los algoritmos de ordenamiento como metodos estaticos.
-// No necesita instanciarse: se llama como Ordenamientos::bubbleSort(...), etc.
+// Clase con los algoritmos de ordenamientos.
 class Ordenamiento {
 public:
     // --- Bubble Sort (Burbuja) ---

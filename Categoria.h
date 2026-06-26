@@ -31,6 +31,7 @@ public:
         descripcion = desc;
     }
 
+	// metodos auxiliares
     // Retorna el nombre de la categoria
     string getNombre() { return nombre; }
 
