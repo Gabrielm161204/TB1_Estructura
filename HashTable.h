@@ -5,6 +5,19 @@
 #include "string"
 
 /*
+Clase: NodoHash
+Representa un nodo de la tabla hash que almacena un par clave-valor que 
+seran almacenados en la lista de cada bucket de la tabla hash. 
+La clave es un string y el valor es de tipo T.
+*/
+template<typename T>
+class NodoHash {
+public:
+    string clave;
+    T valor;
+};
+
+/*
  Clase: HashTable
  Tabla hash generica con manejo de colisiones por encadenamiento (chaining).
  Permite insertar, buscar y eliminar pares clave-valor donde la clave es
@@ -15,8 +28,12 @@
 template<typename T>
 class HashTable {
 private:
-    vector<list<pair<string, T>>> tabla;  // Vector de listas de pares clave-valor
-    int m;                                // Tamanio de la tabla (numero de buckets)
+    /*
+    vector<list<pair<string, T>>> tabla; (alternativa usando la strutura pair, pero se tiene
+    que incluir #include <utility>)
+    */
+    vector<list<NodoHash<T>>> tabla;  // Vector de listas de pares clave-valor
+    int m;                                // Tamaño de la tabla (numero de buckets)
 
     /*
      Funcion hash polinomial de base 31.
@@ -44,18 +61,22 @@ public:
      Inserta un par clave-valor en la tabla.
      Si la clave ya existe en su bucket, actualiza el valor.
      Si no existe, agrega el nuevo par al bucket correspondiente.
+     // Complejidad: O(n) peor caso, O(1) mejor caso
     */
-    void insertar(string key, T value) {
-        int idx = hashFunction(key);
+    void insertar(string clave, T valor) {
+        int idx = hashFunction(clave);
         auto& bucket = tabla[idx];
 
-		for (auto& par : bucket) { // usamos auto para iterar sobre la lista de pares
-            if (par.first == key) {
-				par.second = value;  // si la clave ya existe actualizamos el valor
+        for (auto& nodo : bucket) {
+            if (nodo.clave == clave) {
+                nodo.valor = valor;  // actualiza si ya existe
                 return;
             }
         }
-        bucket.push_back({ key, value });  // insertar nuevo par
+        NodoHash<T> nuevo;
+        nuevo.clave = clave;
+        nuevo.valor = valor;
+        bucket.push_back(nuevo);  // inserta nuevo
     }
 
     /*
@@ -64,13 +85,13 @@ public:
      Si no lo encuentra, retorna false.
      // Complejidad: O(n) peor caso, O(1) mejor caso
     */
-    bool encontrado(string& key, T& out) {
-        int idx = hashFunction(key);
-        const auto& bucket = tabla[idx];
+    bool encontrado(string& clave, T& out) {
+        int idx = hashFunction(clave);
+        auto& bucket = tabla[idx];
 
-        for (auto& par : bucket) {
-            if (par.first == key) {
-                out = par.second;
+        for (auto& nodo : bucket) {
+            if (nodo.clave == clave) {
+                out = nodo.valor;
                 return true;
             }
         }
@@ -81,13 +102,14 @@ public:
      Elimina un par clave-valor de la tabla.
      Retorna true si la clave fue encontrada y eliminada.
      Retorna false si la clave no existe en la tabla.
+     // Complejidad: O(n) peor caso, O(1) mejor caso
     */
-    bool borrar(string& key) {
-        int idx = hashFunction(key);
+    bool borrar(string& clave) {
+        int idx = hashFunction(clave);
         auto& bucket = tabla[idx];
 
         for (auto it = bucket.begin(); it != bucket.end(); ++it) {
-            if (it->first == key) {
+            if (it->clave == clave) {
                 bucket.erase(it);
                 return true;
             }

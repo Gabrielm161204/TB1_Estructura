@@ -133,7 +133,7 @@ public:
 
     /*
      Busca un producto por nombre usando la tabla hash.
-     Retorna un puntero al producto si es encontrado en O(1) promedio.
+     Retorna un puntero al producto si es encontrado
      Retorna nullptr si el producto no existe.
     */
     Producto* buscarPorNombre(string& nombre) {
